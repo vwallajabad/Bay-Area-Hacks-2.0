@@ -1,0 +1,58 @@
+{
+    "elections": [
+      {
+        "date": "2024-11-05",
+        "position": "Mayor",
+        "electionType": "General",
+        "candidates": [
+          {
+            "name": "Alex Johnson",
+            "party": "Democratic"
+          },
+          {
+            "name": "Jamie Lee",
+            "party": "Republican"
+          },
+          {
+            "name": "Sam Casey",
+            "party": "Independent"
+          }
+        ]
+      },
+      {
+        "date": "2024-06-20",
+        "position": "City Council - District 5",
+        "electionType": "Primary",
+        "candidates": [
+          {
+            "name": "Chris Gomez",
+            "party": "Democratic"
+          },
+          {
+            "name": "Morgan Ellis",
+            "party": "Democratic"
+          },
+          {
+            "name": "Pat Jordan",
+            "party": "Republican"
+          }
+        ]
+      },
+      {
+        "date": "2024-08-15",
+        "position": "School Board Trustee",
+        "electionType": "Runoff",
+        "candidates": [
+          {
+            "name": "Taylor Kim",
+            "party": "Nonpartisan"
+          },
+          {
+            "name": "Jordan Smith",
+            "party": "Nonpartisan"
+          }
+        ]
+      }
+    ]
+  }
+  

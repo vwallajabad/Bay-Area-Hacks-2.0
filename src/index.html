@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Local Elections</title>
+</head>
+<body>
+    <div id="elections-list">
+        <!-- Election data will be displayed here -->
+    </div>
+
+    <script>
+        // Fetch JSON data from the provided URL
+        fetch('/local.json')
+            .then(response => response.json())
+            .then(data => {
+                // Access the 'elections' array from the fetched data
+                const elections = data.elections;
+
+                // Get the div where election data will be displayed
+                const electionsList = document.getElementById('elections-list');
+
+                // Loop through each election and create HTML elements to display them
+                elections.forEach(election => {
+                    // Create a div for each election
+                    const electionDiv = document.createElement('div');
+                    electionDiv.classList.add('election');
+
+                    // Add election details to the div
+                    electionDiv.innerHTML = `
+                        <h2>${election.position}</h2>
+                        <p>Date: ${election.date}</p>
+                        <p>Election Type: ${election.electionType}</p>
+                        <h3>Candidates:</h3>
+                        <ul>
+                            ${election.candidates.map(candidate => `<li>${candidate.name} (${candidate.party})</li>`).join('')}
+                        </ul>
+                    `;
+
+                    // Append the election div to the elections list
+                    electionsList.appendChild(electionDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    </script>
+</body>
+</html>
