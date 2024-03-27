@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display Local Elections</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="elections-list">
         <!-- Election data will be displayed here -->
     </div>
+    <nav>
+        <h1 class="logo">Elections App</h1>
+    </nav>
+    
+    <div class="block1">
+        <h1></h1> <!--put a slogan here-->
+        <input type="text" id="locationInput" placeholder="Enter address to find local elections">
+    </div>
 
+    
     <script>
+        /* [given code that displays json file]
         // Fetch JSON data from the provided URL
         fetch('/local.json')
             .then(response => response.json())
@@ -45,6 +56,7 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+       */
     </script>
 </body>
 </html>
