@@ -1,0 +1,38 @@
+*{
+    padding:0;
+    margin: 0 0 0 0; /* top right bottom left */
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: rgb(237, 242, 254);
+    color: rgb(0, 0, 0);
+}
+
+nav {
+    height:200px;
+}
+
+.logo{
+    font-size: 50px;
+    cursor: pointer;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.block1{
+    text-align: center;
+}
+
+#locationInput{
+   
+    border-radius: 50px;
+    width: 700px;
+    height:100px;
+    color:rgb(110, 109, 109);
+    font-size: 25px;
+    letter-spacing: 1px;
+    padding-left: 5%;
+   
+}
+
