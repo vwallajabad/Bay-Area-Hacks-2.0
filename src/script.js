@@ -1,6 +1,6 @@
 const API_KEY = "AIzaSyDY3VfXQLIHMmGGDeapnN8ovmBRUXSTbbk";
 
-function retrieve_data(url) {
+function retrieve_data_representatives(url) {
   fetch(url)
     .then((response) => {
       if (!response.ok) {
@@ -15,29 +15,24 @@ function retrieve_data(url) {
       console.error("There was a problem with your fetch operation:", error);
     });
 }
+function retrieve_election_elections(url) {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      add_to_screen_elections(data);
+    })
+    .catch((error) => {
+      console.error("There was a problem with your fetch operation:", error);
+    });
+}
 
 function add_to_screen(data) {
-  var locationElement = document.getElementById("location");
-
-  locationElement.appendChild(
-    document.createTextNode(data.normalizedInput.line1)
-  );
-  locationElement.appendChild(document.createElement("br"));
-
-  locationElement.appendChild(
-    document.createTextNode(data.normalizedInput.zip)
-  );
-  locationElement.appendChild(document.createElement("br"));
-
-  locationElement.appendChild(
-    document.createTextNode(data.normalizedInput.city)
-  );
-  locationElement.appendChild(document.createElement("br"));
-
-  locationElement.appendChild(
-    document.createTextNode(data.normalizedInput.state)
-  );
-  locationElement.appendChild(document.createElement("br"));
   console.log(data.normalizedInput);
 
   var tbody = document
@@ -47,30 +42,58 @@ function add_to_screen(data) {
   for (let i = 0; i < data.offices.length; i++) {
     var office = data.offices[i];
     if (Array.isArray(office.officialIndices)) {
-      // Iterate over each official index for the current office
       for (let j = 0; j < office.officialIndices.length; j++) {
         var officialIndex = office.officialIndices[j];
         var official = data.officials[officialIndex];
         if (official && official.name) {
-          // Create a new row for each official
           var row = document.createElement("tr");
 
-          // Create a cell for the office name
           var officeCell = document.createElement("td");
           officeCell.textContent = office.name;
           row.appendChild(officeCell);
 
-          // Create a cell for the official name
           var officialCell = document.createElement("td");
           officialCell.textContent = official.name;
           row.appendChild(officialCell);
 
-          // Append the row to the table body
           tbody.appendChild(row);
         }
       }
     }
   }
+}
+
+function add_to_screen_elections(data) {
+  var electionsTableBody = document
+    .getElementById("electionTable")
+    .getElementsByTagName("tbody")[0];
+
+  electionsTableBody.innerHTML = "";
+
+  var row = document.createElement("tr");
+
+  electionsTableBody.appendChild(row);
+
+  data.state.forEach(function (state) {
+    var stateRow = document.createElement("tr");
+
+    var stateNameCell = document.createElement("td");
+    stateNameCell.textContent = state.name;
+    stateRow.appendChild(stateNameCell);
+
+    var electionAdminBodyCell = document.createElement("td");
+    electionAdminBodyCell.textContent = state.electionAdministrationBody.name;
+    stateRow.appendChild(electionAdminBodyCell);
+
+    var electionInfoUrlCell = document.createElement("td");
+    var electionInfoUrlLink = document.createElement("a");
+    electionInfoUrlLink.href = state.electionAdministrationBody.electionInfoUrl;
+    electionInfoUrlLink.textContent = "Election Info";
+    electionInfoUrlCell.appendChild(electionInfoUrlLink);
+    stateRow.appendChild(electionInfoUrlCell);
+
+    electionsTableBody.appendChild(stateRow);
+  });
 }
 
 function initAutocomplete() {
@@ -83,7 +106,13 @@ function initAutocomplete() {
 
   autocomplete.addListener("place_changed", function () {
     var place = autocomplete.getPlace();
-    var url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${CIVICS_API_KEY}&address=${encodeURIComponent(place.formatted_address)}`;
-    retrieve_data(url);
+    var election_data_url = `https://www.googleapis.com/civicinfo/v2/voterinfo?key=${API_KEY}&address=${encodeURIComponent(
+      place.formatted_address
+    )}&electionId=2000`;
+    var retrieve_data_url = `https://www.googleapis.com/civicinfo/v2/representatives?key=${API_KEY}&address=${encodeURIComponent(
+      place.formatted_address
+    )}`;
+    retrieve_data_representatives(retrieve_data_url);
+    retrieve_election_elections(election_data_url);
   });
 }

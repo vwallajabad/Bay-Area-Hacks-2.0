@@ -1,49 +1,96 @@
 * {
   padding: 0;
-  margin: 0 0 0 0; /* top right bottom left */
+  margin: 0;
   font-family: "Roboto", sans-serif;
-}
-
-body {
-  background-color: rgb(237, 242, 254);
-  color: rgb(0, 0, 0);
-}
-
-nav {
-  height: 200px;
-}
-
-.logo {
-  font-size: 50px;
+  box-sizing: border-box;
+ }
+ 
+ body {
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+ }
+ 
+ .navbar {
+  background-color: #333;
+  color: #fff;
+ }
+ 
+ .navbar-brand {
+  font-size: 2rem;
   cursor: pointer;
-  margin-left: 5%;
-  margin-top: 3%;
-}
-
-.block1 {
-  text-align: center;
-}
-
-#locationInput {
+ }
+ 
+ .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100%;
+  margin-top: 20px;
+ }
+ 
+ .card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+ }
+ 
+ .card-body {
+  padding: 2px 16px;
+ }
+ 
+ #locationInput {
   border-radius: 50px;
-  width: 700px;
-  height: 100px;
-  color: rgb(110, 109, 109);
-  font-size: 25px;
+  width: 100%;
+  height: 50px;
+  color: #333;
+  font-size: 18px;
   letter-spacing: 1px;
   padding-left: 5%;
-}
+  border: 2px solid #333;
+  background-color: #fff;
+ }
+ 
 
-/* Entire autocomplete box */
-.pac-container {
+ .pac-container {
   border-radius: 5px;
-  width: 700px;
-  color: rgb(110, 109, 109);
+  width: 100%;
+  color: #333;
   letter-spacing: 1px;
-}
+  background-color: #fff;
+  border: 2px solid #333;
+ }
+ 
 
-/* individual autocomplete boxes */
-.pac-item {
-  padding: 5px;
-}
+ .pac-item {
+  padding: 10px;
+  cursor: pointer;
+ }
+ 
 
+ #electedtable, #electionTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+ }
+ 
+ #electedtable thead, #electionTable thead {
+  background-color: #333;
+  color: #fff;
+ }
+ 
+ #electedtable tbody tr:nth-child(even), #electionTable tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+ }
+ 
+ #electedtable tbody tr:hover, #electionTable tbody tr:hover {
+  background-color: #ddd;
+ }
+ 
+ #electedtable th, #electionTable th {
+  padding: 10px;
+  text-align: left;
+ }
+ 
+ #electedtable td, #electionTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+ }
