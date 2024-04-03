@@ -34,35 +34,59 @@ function retrieve_election_elections(url) {
 
 function add_to_screen(data) {
   console.log(data.normalizedInput);
-
+ 
   var tbody = document
-    .getElementById("electedtable")
-    .getElementsByTagName("tbody")[0];
-
+     .getElementById("electedtable")
+     .getElementsByTagName("tbody")[0];
+ 
   for (let i = 0; i < data.offices.length; i++) {
-    var office = data.offices[i];
-    if (Array.isArray(office.officialIndices)) {
-      for (let j = 0; j < office.officialIndices.length; j++) {
-        var officialIndex = office.officialIndices[j];
-        var official = data.officials[officialIndex];
-        if (official && official.name) {
-          var row = document.createElement("tr");
+     var office = data.offices[i];
+     if (Array.isArray(office.officialIndices)) {
+       for (let j = 0; j < office.officialIndices.length; j++) {
+         var officialIndex = office.officialIndices[j];
+         var official = data.officials[officialIndex];
+         if (official && official.name) {
+           var row = document.createElement("tr");
+ 
+           var officeCell = document.createElement("td");
+           officeCell.textContent = office.name;
+           row.appendChild(officeCell);
+ 
+           var officialCell = document.createElement("td");
+           officialCell.textContent = official.name;
+           row.appendChild(officialCell);
+ 
+           var partyCell = document.createElement("td");
+           partyCell.textContent = official.party;
+           if (official.party === "Republican Party") {
+             partyCell.style.color = "red";
+           } else if (official.party === "Democratic Party") {
+             partyCell.style.color = "blue";
+           } else {
+             partyCell.style.color = "black";
+           }
+           row.appendChild(partyCell);
 
-          var officeCell = document.createElement("td");
-          officeCell.textContent = office.name;
-          row.appendChild(officeCell);
-
-          var officialCell = document.createElement("td");
-          officialCell.textContent = official.name;
-          row.appendChild(officialCell);
-
-          tbody.appendChild(row);
-        }
-      }
-    }
+           var contactCell = document.createElement("td");
+           contactCell.textContent = official.phones;
+           row.appendChild(contactCell);
+ 
+           var websiteCell = document.createElement("td");
+           if (official.urls && official.urls.length > 0) {
+             var websiteLink = document.createElement("a");
+             websiteLink.href = official.urls[0];
+             websiteLink.textContent = (new URL(official.urls[0]).hostname).replace("www.", "");
+             websiteCell.appendChild(websiteLink);
+           }
+           row.appendChild(websiteCell);
+  
+           tbody.appendChild(row);
+         }
+       }
+     }
   }
-}
-
+ }
+ 
 function add_to_screen_elections(data) {
   var electionsTableBody = document
     .getElementById("electionTable")
